@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Ogrenci4.src.Views.NewStudy"
+             Title="Çalışma Girişi">
+
+
+    <ScrollView x:Name="scrll">
+        <StackLayout>
+            <!--<StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"
+                              Buttons="Secondary" />
+            </StackLayout.GestureRecognizers>-->
+
+
+
+            <Label  Padding="0,20,0,30"
+            Text="Yapılan Çalışma Ekleyin"
+            VerticalOptions="Center"
+            TextColor="Gray"
+            FontSize="Large"
+            HorizontalOptions="Center" />
+
+
+            <Button x:Name="btnTimer" Text="Timerr" Clicked="btnTimer_Clicked"></Button>
+
+
+
+            <HorizontalStackLayout 
+                Margin="10,10,10,15">
+                <Label Text="Çalışma Türü:"
+                       FontSize="Medium"
+                       FontAttributes="Bold"
+                       TextColor="Gray" 
+                       VerticalOptions="Center"
+                       ></Label>
+                <!--<Label Margin="20,0,0,0" VerticalOptions="Center"
+                       FontSize="Medium"
+                    Text="{Binding SeciliTur}"></Label>-->
+            </HorizontalStackLayout>
+
+
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="AUTO"></RowDefinition>
+                    <RowDefinition Height="AUTO"></RowDefinition>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                    <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                    <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+
+
+
+                <Button  Text="Konu Çalışma" Margin="5,5,5,5" CornerRadius="18"
+                            BorderWidth="1"
+                             BorderColor="Black"
+                             Grid.Column="0" Grid.Row="0"
+                            Background="{Binding SeciliTur,
+                            Converter={StaticResource ButtonBackConverter}, ConverterParameter='Konu Çalışma'}"
+                             TextColor="{Binding SeciliTur, Converter={StaticResource ButtonForeConverter}, 
+                            ConverterParameter='Konu Çalışma'}"
+                             Command="{Binding SelectTypeCommand}" CommandParameter="Konu Çalışma"
+                             
+                            />
+                <Button x:Name="btnSoruCozme"  Text="Soru Çözme" Margin="5,5,5,5" CornerRadius="18"
+                            BorderWidth="1" BorderColor="Black"
+                             Grid.Column="1" Grid.Row="0"
+                            Background="{Binding SeciliTur,
+                            Converter={StaticResource ButtonBackConverter}, ConverterParameter='Soru Çözme'}"
+                             TextColor="{Binding SeciliTur, Converter={StaticResource ButtonForeConverter}, 
+                            ConverterParameter='Soru Çözme'}"
+                             Command="{Binding SelectTypeCommand}" CommandParameter="Soru Çözme"
+                            />
+                <Button  Text="Video İzleme" Margin="5,5,5,5" CornerRadius="18"
+                             Grid.Column="2" Grid.Row="0"
+                            BorderWidth="1" BorderColor="Black"
+                            Background="{Binding SeciliTur,
+                            Converter={StaticResource ButtonBackConverter}, ConverterParameter='Video İzleme'}"
+                            TextColor="{Binding SeciliTur, Converter={StaticResource ButtonForeConverter}, 
+                            ConverterParameter='Video İzleme'}"
+                            Command="{Binding SelectTypeCommand}" CommandParameter="Video İzleme"
+                            />
+
+
+                <Button  Text="Kitap Okuma" Margin="5,5,5,5" CornerRadius="18"
+                            BorderWidth="1"
+                             BorderColor="Black"
+                             Grid.Column="0" Grid.Row="1"
+                            Background="{Binding SeciliTur,
+                            Converter={StaticResource ButtonBackConverter}, ConverterParameter='Kitap Okuma'}"
+                             TextColor="{Binding SeciliTur, Converter={StaticResource ButtonForeConverter}, 
+                            ConverterParameter='Kitap Okuma'}"
+                             Command="{Binding SelectTypeCommand}" CommandParameter="Kitap Okuma"
+                            />
+                <Button  Text="Konu Tekrarı" Margin="5,5,5,5" CornerRadius="18"
+                            BorderWidth="1" BorderColor="Black"
+                             Grid.Column="1" Grid.Row="1"
+                            Background="{Binding SeciliTur,
+                            Converter={StaticResource ButtonBackConverter}, ConverterParameter='Konu Tekrarı'}"
+                             TextColor="{Binding SeciliTur, Converter={StaticResource ButtonForeConverter}, 
+                            ConverterParameter='Konu Tekrarı'}"
+                             Command="{Binding SelectTypeCommand}" CommandParameter="Konu Tekrarı"
+                            />
+                <Button  Text="Diğer Etkinlik" Margin="5,5,5,5" CornerRadius="18"
+                             Grid.Column="2" Grid.Row="1"
+                            BorderWidth="1" BorderColor="Black"
+                            Background="{Binding SeciliTur,
+                            Converter={StaticResource ButtonBackConverter}, ConverterParameter='Diğer Etkinlik'}"
+                            TextColor="{Binding SeciliTur, Converter={StaticResource ButtonForeConverter}, 
+                            ConverterParameter='Diğer Etkinlik'}"
+                            Command="{Binding SelectTypeCommand}" CommandParameter="Diğer Etkinlik"
+                            />
+
+            </Grid>
+            
+            <Label Text="Çalışma Zamanı"
+                   TextColor="Gray"
+                   FontAttributes="Bold"
+                   FontSize="Medium"
+                   Margin="7,20,5,7"/>
+
+            <Grid Padding="0,20,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="AUTO"/>
+                    <ColumnDefinition Width="AUTO"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+
+
+
+                <Label Text=" Baş :" HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                      Grid.Column="0"  Grid.Row="0" FontSize="Medium"
+                    
+                       TextColor="Gray"></Label>
+                <DatePicker  HeightRequest="60"
+                         Grid.Column="1"  Grid.Row="0"
+                        Date="{Binding BasTarih, Mode=TwoWay}"
+                        BackgroundColor="WhiteSmoke"  
+                        HorizontalOptions="Center" VerticalOptions="Center"
+                          Margin="2,0,10,0"    ></DatePicker>
+
+                <Frame Grid.Column="2"  Grid.Row="0" 
+                           BackgroundColor="WhiteSmoke" HeightRequest="60">
+                    <TimePicker Grid.Column="2"  Grid.Row="0"
+                         Time="{Binding BasSaat, Mode=TwoWay}" HeightRequest="50"
+                        BackgroundColor="WhiteSmoke"></TimePicker>
+                </Frame>
+            </Grid>
+
+
+
+            <Grid Padding="0,20,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="AUTO"/>
+                    <ColumnDefinition Width="AUTO"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+
+
+
+                <Label Text=" Bit :" HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                      Grid.Column="0"  Grid.Row="0" FontSize="Medium"
+                    
+                       TextColor="Gray"></Label>
+
+
+                <DatePicker x:Name="dtBit" HeightRequest="60" 
+                         Grid.Column="1"  Grid.Row="0" Date="{Binding BitTarih, Mode=TwoWay}"
+                        BackgroundColor="WhiteSmoke"  HorizontalOptions="Center" VerticalOptions="Center"
+                          Margin="2,0,10,0"    ></DatePicker>
+
+                <Frame Grid.Column="2"  Grid.Row="0" 
+                           BackgroundColor="WhiteSmoke" HeightRequest="60">
+                    <TimePicker Grid.Column="2"  Grid.Row="0"
+                        Time="{Binding BitSaat, Mode=TwoWay}"  HeightRequest="40"
+                        BackgroundColor="WhiteSmoke"  ></TimePicker>
+                </Frame>
+            </Grid>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Ders Seçin" VerticalOptions="Center"
+                   TextColor="Gray"
+                   FontAttributes="Bold"
+                   FontSize="Medium"
+                   Margin="7,20,5,7"/>
+                <Label Text="(Sağ-Sol Kaydırın)"  VerticalOptions="Center"
+                   TextColor="LightGrey" HorizontalOptions="EndAndExpand"
+                   FontAttributes="Bold"
+                   FontSize="12" Padding="10,10,20,0"
+                   />
+            </StackLayout>
+
+            <ScrollView Orientation="Horizontal" Margin="10,10,10,60">
+                <HorizontalStackLayout>
+                    <Button  Text="Matematik" Margin="5,5,5,5" CornerRadius="18"
+                            BorderWidth="1"
+                             BorderColor="Black"
+                             
+                            Background="{Binding SeciliDers,
+                            Converter={StaticResource ButtonBackConverter}, ConverterParameter='Matematik'}"
+                             TextColor="{Binding SeciliDers, Converter={StaticResource ButtonForeConverter}, 
+                            ConverterParameter='Matematik'}"
+                             Command="{Binding SelectDersCommand}" CommandParameter="Matematik"
+                             
+                            />
+                    <Button  Text="Türkçe" Margin="5,5,5,5" CornerRadius="18"
+                            BorderWidth="1"
+                             BorderColor="Black"
+                             
+                            Background="{Binding SeciliDers,
+                            Converter={StaticResource ButtonBackConverter}, ConverterParameter='Türkçe'}"
+                             TextColor="{Binding SeciliDers, Converter={StaticResource ButtonForeConverter}, 
+                            ConverterParameter='Türkçe'}"
+                             Command="{Binding SelectDersCommand}" CommandParameter="Türkçe"
+                             
+                            />
+                    <Button  Text="Fen Bilgisi" Margin="5,5,5,5" CornerRadius="18"
+                            BorderWidth="1"
+                             BorderColor="Black"
+                            
+                            Background="{Binding SeciliDers,
+                            Converter={StaticResource ButtonBackConverter}, ConverterParameter='Fen Bilgisi'}"
+                             TextColor="{Binding SeciliDers, Converter={StaticResource ButtonForeConverter}, 
+                            ConverterParameter='Fen Bilgisi'}"
+                             Command="{Binding SelectDersCommand}" CommandParameter="Fen Bilgisi"
+                             
+                            />
+                    <Button  Text="Yabancı Dil" Margin="5,5,5,5" CornerRadius="18"
+                            BorderWidth="1"
+                             BorderColor="Black"                     
+                            Background="{Binding SeciliDers,
+                            Converter={StaticResource ButtonBackConverter}, ConverterParameter='Yabancı Dil'}"
+                             TextColor="{Binding SeciliDers, Converter={StaticResource ButtonForeConverter}, 
+                            ConverterParameter='Yabancı Dil'}"
+                             Command="{Binding SelectDersCommand}" CommandParameter="Yabancı Dil"
+                             
+                            />
+                    <Button  Text="Sosyal Bilgiler" Margin="5,5,5,5" CornerRadius="18"
+                            BorderWidth="1"
+                             BorderColor="Black"      
+                            Background="{Binding SeciliDers,
+                            Converter={StaticResource ButtonBackConverter}, ConverterParameter='Sosyal Bilgiler'}"
+                             TextColor="{Binding SeciliDers, Converter={StaticResource ButtonForeConverter}, 
+                            ConverterParameter='Sosyal Bilgiler'}"
+                             Command="{Binding SelectDersCommand}" CommandParameter="Sosyal Bilgiler"
+                             
+                            />
+                    <Button  Text="Din Kültürü" Margin="5,5,5,5" CornerRadius="18"
+                            BorderWidth="1"
+                             BorderColor="Black"
+      
+                            Background="{Binding SeciliDers,
+                            Converter={StaticResource ButtonBackConverter}, ConverterParameter='Din Kültürü'}"
+                             TextColor="{Binding SeciliDers, Converter={StaticResource ButtonForeConverter}, 
+                            ConverterParameter='Din Kültürü'}"
+                             Command="{Binding SelectDersCommand}" CommandParameter="Din Kültürü"
+                             
+
+                            />
+                    <Button  Text="Karışık" Margin="5,5,5,5" CornerRadius="18"
+                            BorderWidth="1"
+                             BorderColor="Black"
+                            
+                            Background="{Binding SeciliDers,
+                            Converter={StaticResource ButtonBackConverter}, ConverterParameter='Karışık'}"
+                             TextColor="{Binding SeciliDers, Converter={StaticResource ButtonForeConverter}, 
+                            ConverterParameter='Karışık'}"
+                             Command="{Binding SelectDersCommand}" CommandParameter="Karışık"
+                             
+                            />
+                    <Button  Text="Bilişim Teknolojileri" Margin="5,5,5,5" CornerRadius="18"
+                            BorderWidth="1"
+                             BorderColor="Black"
+                            
+                            Background="{Binding SeciliDers,
+                            Converter={StaticResource ButtonBackConverter}, ConverterParameter='Bilişim Teknolojileri'}"
+                             TextColor="{Binding SeciliDers, Converter={StaticResource ButtonForeConverter}, 
+                            ConverterParameter='Bilişim Teknolojileri'}"
+                             Command="{Binding SelectDersCommand}" CommandParameter="Bilişim Teknolojileri"
+                             
+                            />
+                    <Button  Text="Resim" Margin="5,5,5,5" CornerRadius="18"
+                            BorderWidth="1"
+                             BorderColor="Black"
+                             
+                            Background="{Binding SeciliDers,
+                            Converter={StaticResource ButtonBackConverter}, ConverterParameter='Resim'}"
+                             TextColor="{Binding SeciliDers, Converter={StaticResource ButtonForeConverter}, 
+                            ConverterParameter='Resim'}"
+                             Command="{Binding SelectDersCommand}" CommandParameter="Resim"/>
+
+                    <Button  Text="Müzik" Margin="5,5,5,5" CornerRadius="18"
+                            BorderWidth="1"
+                             BorderColor="Black"
+                             
+                            Background="{Binding SeciliDers,
+                            Converter={StaticResource ButtonBackConverter}, ConverterParameter='Müzik'}"
+                             TextColor="{Binding SeciliDers, Converter={StaticResource ButtonForeConverter}, 
+                            ConverterParameter='Müzik'}"
+                             Command="{Binding SelectDersCommand}" CommandParameter="Müzik"/>
+
+                    <Button  Text="Beden Eğitimi" Margin="5,5,5,5" CornerRadius="18"
+                            BorderWidth="1"
+                             BorderColor="Black"
+                             
+                            Background="{Binding SeciliDers,
+                            Converter={StaticResource ButtonBackConverter}, ConverterParameter='Beden Eğitimi'}"
+                             TextColor="{Binding SeciliDers, Converter={StaticResource ButtonForeConverter}, 
+                            ConverterParameter='Beden Eğitimi'}"
+                             Command="{Binding SelectDersCommand}" CommandParameter="Beden Eğitimi"/>
+
+                </HorizontalStackLayout>
+
+
+            </ScrollView>
+
+            <VerticalStackLayout  Padding="10,10,0,0"
+                IsVisible="{Binding SeciliTur, 
+                Converter={StaticResource SayfaSayisiConverter}}">
+                <Label Text="Sayfa Sayısı" FontSize="Medium"></Label>
+                <Entry x:Name="txtSayfaSayi" Placeholder="Sayfa Sayısı"  BackgroundColor="WhiteSmoke"
+                       Text="{Binding SayfaSayisi, Mode=TwoWay}" FontSize="Medium"></Entry>
+            </VerticalStackLayout>
+
+
+            <VerticalStackLayout  Padding="10,10,0,0"
+                IsVisible="{Binding SeciliTur, 
+                Converter={StaticResource  SoruSayisiVisibleConverter}}">
+                <Label Text="Soru Sayısı" FontSize="Medium"></Label>
+                <Entry x:Name="txtSoruSayi" Placeholder="Soru Sayısı" ReturnCommand="{Binding KlavyeKapatCommand}"
+                       Keyboard="Numeric" ReturnType="Done" BackgroundColor="WhiteSmoke"
+                 Text="{Binding SoruSayisi, Mode=TwoWay}" FontSize="Medium"></Entry>
+            </VerticalStackLayout>
+
+
+            <Button x:Name="btnTamam"  Text="İlerle" Margin="5,5,5,5" CornerRadius="18"
+                            BorderWidth="1" BorderColor="Black"
+                    BackgroundColor="Black" TextColor="White"
+                            Command="{Binding IlerleCommand}"
+                            >
+
+
+            </Button>
+        </StackLayout>
+
+    </ScrollView>
+
+
+</ContentPage>

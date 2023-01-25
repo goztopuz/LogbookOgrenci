@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Ogrenci4.src.Views.NewStudySection2"
+              xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             Title="Çalışma Detaylar">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Label  Padding="0,10,0,0"
+            Text="Sayfa 2" TextColor="LightGray"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+
+
+            <Label HorizontalOptions="Center" Text="{Binding DersAdi}" FontSize="Large" TextColor="LightGray"></Label>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Margin="10,0,0,0" Text="Konu Seçin" VerticalOptions="Center"
+                       FontAttributes="Bold" TextColor="Gray" FontSize="Medium"
+                       HorizontalOptions="StartAndExpand"></Label>
+                <Button Text="+"  HorizontalOptions="EndAndExpand" BackgroundColor="White"
+                   FontSize="40"  Command="{Binding NewTopicCommand}"
+                        Padding="0,0,20,0" TextColor="Blue"></Button>
+            </StackLayout>
+
+
+
+            <!--<ListView RowHeight="50"
+                          Margin="5,10,5,15"
+                    ItemsSource="{Binding SeciliKonular}">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label HorizontalOptions="StartAndExpand"
+                                Text="{Binding Name}" VerticalOptions="Center"></Label>
+                            </StackLayout>
+                            
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>-->
+
+
+            <CollectionView x:Name="lstKonular" ItemsSource="{Binding SeciliKonular}"
+                ItemsLayout="HorizontalList">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="5">
+                            <!--<Label Text="{Binding Name}"></Label>-->
+
+                            <Button  Text="{Binding Name}" Margin="5,5,5,5" CornerRadius="18"
+                            BorderWidth="1"
+                             BorderColor="Black"
+                             
+                            BackgroundColor="White"
+                             TextColor="Black"
+                             
+                            />
+
+
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Margin="20,0,0,20" TextColor="Gray" Text="Henüz Konu Girilmemiş" IsVisible="{Binding SeciliKonular, 
+                Converter={StaticResource TopicListVisibleConverter}}">
+            </Label>
+
+            <Label  Margin="10,10,0,0" Text="Açıklama/Diğer Konu" TextColor="Gray"
+                   FontAttributes="Bold" FontSize="Medium"></Label>
+            <Border Margin="5"   >
+                <Editor   Text="{Binding Description,Mode=TwoWay}"
+                         Placeholder="Açıklama"
+                    HeightRequest="80">
+                </Editor>
+            </Border>
+            <Label Text="Medya/Çözülemeyen" Margin="10,20,35,10"
+                   FontAttributes="Bold" TextColor="Gray" FontSize="Medium"></Label>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0,0,10,0" Spacing="10"  >
+                <!--<ImageButton Source="pencill.png"  Command="{Binding DrawButtonCommand}"
+                             HeightRequest="50" WidthRequest="50" HorizontalOptions="EndAndExpand"></ImageButton>-->
+                <ImageButton Source="cameraa.png" Command="{Binding CameraButtonCommand}"
+                             ></ImageButton>
+                <!--<ImageButton Source="videorecordd.png" HorizontalOptions="End"></ImageButton>
+                <ImageButton Source="micc.png" HorizontalOptions="End"></ImageButton>-->
+            </StackLayout>
+
+            <syncfusion:SfListView x:Name="listView"  HeightRequest="110"
+              SelectionChangedCommand="{Binding ListViewSelectionChangedCommand}"
+               SelectionChangedCommandParameter="{x:Reference listView}"
+                   ItemsSource="{Binding Resimler}" Orientation="Horizontal"
+                   ItemSize="100">
+                <syncfusion:SfListView.ItemTemplate>
+                    <DataTemplate>
+
+
+
+                        <!--<Label Text="{Binding Name}"></Label>-->
+                        <StackLayout>
+                            <Image Source="{Binding FilePath}"
+                                  
+                                   HeightRequest="90" WidthRequest="60">
+                                <Image.GestureRecognizers>
+                                    <!--<TapGestureRecognizer NumberOfTapsRequired="2"
+                                                Tapped="TapGestureRecognizer_Tapped">
+
+                                            </TapGestureRecognizer>-->
+                                </Image.GestureRecognizers>
+                            </Image>
+
+                        </StackLayout>
+
+                    </DataTemplate>
+                </syncfusion:SfListView.ItemTemplate>
+            </syncfusion:SfListView>
+            <!--<HorizontalStackLayout Padding="10">
+
+                <CollectionView x:Name="lstResimler"  
+                          ItemsSource="{Binding Resimler}">
+
+
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+
+
+
+                            --><!--<Label Text="{Binding Name}"></Label>--><!--
+                            <StackLayout>
+                                <Image Source="{Binding FilePath}"
+                                  
+                                   HeightRequest="90" WidthRequest="60">
+                                    <Image.GestureRecognizers>
+                                        --><!--<TapGestureRecognizer NumberOfTapsRequired="2"
+                                                Tapped="TapGestureRecognizer_Tapped">
+
+                                            </TapGestureRecognizer>--><!--
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                            </StackLayout>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                --><!--<Label Text="Resimler" VerticalOptions="Center" TextColor="LightGray" ></Label>--><!--
+            </HorizontalStackLayout>-->
+
+            <Label Text="Açıklayıcı Renk Tanımı(İsteğe Bağlı)" Margin="10,20,10,0"
+                   FontAttributes="Bold" TextColor="Gray" ></Label>
+
+            <StackLayout Orientation="Horizontal" Margin="10" Spacing="15">
+
+                <Button  HeightRequest="30" 
+                      WidthRequest="30" Opacity="1" BackgroundColor="MediumBlue" CornerRadius="50"  
+                      FontSize="Small" Padding="-9,-12,-10,-10" 
+                      TextColor="White"  
+                      Text="{Binding SeciliRenk, Converter={StaticResource ColorToCheckConverter}
+                    ,ConverterParameter='Mavi'}"
+                        Command="{Binding SelectColorCommand}" CommandParameter="Mavi"  
+                         >
+                </Button>
+                <Button  HeightRequest="30" 
+                      WidthRequest="30" Opacity="1" BackgroundColor="MediumSeaGreen" CornerRadius="50"  
+                      FontSize="Small" Padding="-9,-12,-10,-10" 
+                      TextColor="White"              
+                           Text="{Binding SeciliRenk, Converter={StaticResource ColorToCheckConverter}
+                    ,ConverterParameter='Yesil'}"
+                        Command="{Binding SelectColorCommand}" CommandParameter="Yesil"  
+     
+                      ></Button>
+                <Button  HeightRequest="30" 
+                      WidthRequest="30" Opacity="1" BackgroundColor="MediumPurple" CornerRadius="50"  
+                      FontSize="Small" Padding="-9,-12,-10,-10" 
+                      TextColor="White"  
+                       Text="{Binding SeciliRenk, Converter={StaticResource ColorToCheckConverter}
+                    ,ConverterParameter='Mor'}"
+                        Command="{Binding SelectColorCommand}" CommandParameter="Mor"  
+                         
+                         ></Button>
+                <Button  HeightRequest="30" 
+                      WidthRequest="30" Opacity="1" BackgroundColor="Red" CornerRadius="50"  
+                      FontSize="Small" Padding="-9,-12,-10,-10" 
+                      TextColor="White" 
+                      Text="{Binding SeciliRenk, Converter={StaticResource ColorToCheckConverter}
+                        ,ConverterParameter='Kırmızı'}"
+                        Command="{Binding SelectColorCommand}" CommandParameter="Kırmızı"  
+                         ></Button>
+                <Button  HeightRequest="30" 
+                      WidthRequest="30" Opacity="1" BackgroundColor="DarkOrange" CornerRadius="50"  
+                      FontSize="Small" Padding="-9,-12,-10,-10" 
+                      TextColor="White"
+                       Text="{Binding SeciliRenk, Converter={StaticResource ColorToCheckConverter}
+                        ,ConverterParameter='Turuncu'}"
+                        Command="{Binding SelectColorCommand}" CommandParameter="Turuncu"  
+                         ></Button>
+                <Button  Text="Renk Yok" Command="{Binding ClearColorCommand}"></Button>
+
+            </StackLayout>
+
+
+
+            <Button x:Name="btnTamam"  Text="Kaydet" Margin="5,5,5,5" CornerRadius="18"
+                            BorderWidth="1" BorderColor="Black"
+                    BackgroundColor="Black" TextColor="White"
+                            Command="{Binding KaydetCommand}"/>
+
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

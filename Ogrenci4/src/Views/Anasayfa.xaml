@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             x:Class="Ogrenci4.src.Views.Anasayfa"
+             Title="Anasayfa">
+    <ScrollView>
+        <VerticalStackLayout Padding="15">
+
+
+
+            
+            <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Ödev"  FontSize="40" TextColor="Red"  />
+                            <Span Text=" M-Ödev" TextColor="DarkOrange" FontSize="40"></Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+               
+            </HorizontalStackLayout>
+
+
+            <StackLayout  IsVisible="True" Background="Red" Opacity="0.7">
+                
+                
+                <Label Text="Devam Eden Çalışma"  TextColor="White"/>
+                <Label x:Name="lblTimer" TextColor="White" 
+                       HorizontalOptions="Center" FontSize="Large" Text=""></Label>
+
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding }">
+                        
+                    </TapGestureRecognizer>
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+         
+         
+     
+            
+            <Image Source="okullogo.png" HorizontalOptions="Center"
+                HeightRequest="100" WidthRequest="100"></Image>
+
+            
+
+            <Label 
+            Text="Atatürk Ortaokulu Tübitak Çalışması"
+            VerticalOptions="Center" FontSize="Medium"
+            HorizontalOptions="Center" />
+
+            <HorizontalStackLayout Padding="0,20,0,20" VerticalOptions="Center" HorizontalOptions="Center">
+                <Label  FontSize="Medium" VerticalOptions="Center" TextColor="Gray" Text="Öğrenci : "/>
+                <Label FontSize="Medium"  VerticalOptions="Center" TextColor="Gray" Text="{Binding OgrenciNo}"></Label>
+                <Label FontSize ="Medium" VerticalOptions="Center" TextColor="Gray" Text=" - " />
+                <Label  FontSize="Medium" VerticalOptions="Center" Padding="10,0,0,0" TextColor="Gray" Text="{Binding OgrenciIsim}"/>
+                <Label FontSize="Medium" VerticalOptions="Center" Text=" - " TextColor="Gray"></Label>
+                <Label FontSize="Medium" VerticalOptions="Center" Text="{Binding Seviye, Converter={StaticResource SeviyeStringConverter}}" TextColor="Gray"></Label>
+                <Image Source="{Binding Seviye}" HeightRequest="40" WidthRequest="40" HorizontalOptions="EndAndExpand"></Image>
+            </HorizontalStackLayout>
+
+
+            <HorizontalStackLayout Margin="0,10,0,20" Spacing="30">
+                <Button
+                x:Name="CounterBtn"
+                Text="Yapılan Çalışma Ekle"
+                Command="{Binding NewStudyCommand}"
+                HorizontalOptions="Center"  />
+
+                <Button BackgroundColor="Red"
+                x:Name="CounterBtn2"
+                Text="Öğretmen Mesajları" 
+                Command="{Binding MesajlarCommand}"
+                HorizontalOptions="Center">
+                </Button>
+
+            </HorizontalStackLayout>
+            <Button
+                x:Name="btnNewSession"
+                Background="Blue"
+                Text="Yeni Çalışma Başlat"
+                Command="{Binding NewSessionCommand}"
+                HorizontalOptions="Center"  />
+
+            <Label TextColor="Gray"
+                Text="{Binding MesajListe, Converter={StaticResource MesajSayiToStringConverter}}" HorizontalOptions="EndAndExpand"></Label>
+
+
+
+
+
+            <Label Text="Yapılan Son Çalışmalar" FontSize="Medium" VerticalOptions="Center"
+                TextColor="Gray" HorizontalOptions="CenterAndExpand"></Label>
+            <Button Text="Yenile" Margin="20,3,0,0" Padding="0,0,0,0"
+                        Command="{Binding RefreshCommand}" HeightRequest="40" WidthRequest="100"
+                      FontSize="Small"   TextColor="White" Background="Green"></Button>
+
+
+
+
+            <ActivityIndicator IsRunning="{Binding IsLoading}" />
+
+
+            <syncfusion:SfListView x:Name="listView"  
+              SelectionChangedCommand="{Binding ListViewSelectionChangedCommand}"
+               SelectionChangedCommandParameter="{x:Reference listView}"
+                   ItemsSource="{Binding SonCalismalar}" 
+                   ItemSize="180">
+                <syncfusion:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="-3,10,0,0" CornerRadius="8"  
+                                   BackgroundColor="WhiteSmoke">
+                            <StackLayout HeightRequest="180">
+
+                                <Grid Margin="0,12,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="6"></ColumnDefinition>
+                                        <ColumnDefinition Width="10"></ColumnDefinition>
+
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <Grid BackgroundColor="{Binding CalismaColor,
+                                            Converter={StaticResource StringToColorConverter}}" 
+                                        Grid.Column="0">
+
+                                    </Grid>
+                                    <Grid Grid.Column="1"></Grid>
+
+                                    <StackLayout Grid.Column="2">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label TextColor="Black" 
+                                                       FontSize="Large"
+                                                       FontAttributes="Bold"
+                                                       Text="{Binding Lesson}"/>
+                                            <Label TextColor="Gray"  FontSize="Medium"  HorizontalOptions="EndAndExpand"
+                                                       Text="{Binding StartDate, 
+                                                    Converter={StaticResource CalismaStartDateConverter}}"/>
+
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label TextColor="Gray" FontSize="Medium" FontAttributes="Bold"
+                                                    Text="{Binding Type}"/>
+                                            <!--<Label Padding="0,5,0,2"
+                                                    TextColor="Gray" FontSize="Default" HorizontalOptions="EndAndExpand"
+                                                    Text="{Binding StartDate, Converter={StaticResource CalismaTimeConverter2}
+                                                ,ConverterParameter={Binding EndDate}}"></Label>-->
+
+
+                                            <!--<Label  TextColor="Gray" Padding="0,5,0,2" FontSize="Default" HorizontalOptions="EndAndExpand"
+                                                   Text="{Binding StartDate, Converter={StaticResource DateToTimeStringConverter}}" >
+
+                                            </Label>
+                                            <Label  TextColor="Gray" Text="-"></Label>
+                                            <Label  TextColor="Gray" Padding="0,5,0,2" FontSize="Default" HorizontalOptions="EndAndExpand"
+                                                   Text="{Binding EndDate, Converter={StaticResource DateToTimeStringConverter}}" >
+
+                                            </Label>-->
+
+                                            <Label FontSize="Default" TextColor="Gray" HorizontalOptions="EndAndExpand">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span  TextColor="Gray"  Text="{Binding StartDate, Converter={StaticResource DateToTimeStringConverter}}" />
+                                                        <Span  TextColor="Gray" Text="-"></Span>
+                                                        <Span    Text="{Binding EndDate, Converter={StaticResource DateToTimeStringConverter}}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+
+                                        <StackLayout Orientation="Horizontal" Padding="0,5,0,2">
+                                            <Label Text="Konu : " TextColor="Gray"/>
+                                            <Label  TextColor="Gray"
+                                                    Text="{Binding Konular}"/>
+
+                                        </StackLayout>
+
+
+
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <StackLayout Grid.Column="0">
+                                                <Label Text="{Binding Description}" TextColor="Gray" Padding="0,5,0,2"/>
+
+                                                <StackLayout>
+                                                    <Label Text="{Binding QuestionCount, Converter={StaticResource SoruToStringConverter}}"></Label>
+                                                    <Label Text="{Binding PageCount, Converter={StaticResource SayfaToStringConverter}}"></Label>
+                                                </StackLayout>
+                                                <Label Padding="0,0,0,2" Text="{Binding calisma, Converter={StaticResource SayfaSoruYaziConverter}}"/>
+                                            </StackLayout>
+
+                                            <Button x:Name="btnGit" Text="Git"  Margin="0,0,5,10"
+                                                Command="{Binding CollSelectCommand}"
+                                                CommandParameter="{Binding Id}"
+                                                Clicked="btnGit_Clicked"
+                                                 Grid.Column="1" FontSize="Small"
+                                                TextColor="White" HeightRequest="40"
+                                                BackgroundColor="Green">
+
+
+                                            </Button>
+                                        </Grid>
+
+
+
+                                    </StackLayout>
+                                </Grid>
+                            </StackLayout>
+                        </Frame>
+
+                    </DataTemplate>
+
+                </syncfusion:SfListView.ItemTemplate>
+            </syncfusion:SfListView>
+
+            <!--<CollectionView x:Name="collKonular"    SelectionMode="Single"  SelectionChanged="collKonular_SelectionChanged"
+               SelectedItem="{Binding SeciliKayit}"   ItemsSource="{Binding SonCalismalar}">
+
+                <CollectionView.Behaviors>
+                    <toolkit:EventToCommandBehavior
+                EventName="SelectionChanged"
+                Command="{Binding TappedCommand}"
+                 CommandParameter="{Binding SeciliKayit}"
+                    />
+                </CollectionView.Behaviors>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="-3,10,0,0" CornerRadius="8"  
+                                   BackgroundColor="WhiteSmoke">
+                            <StackLayout HeightRequest="170">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="6"></ColumnDefinition>
+                                        <ColumnDefinition Width="10"></ColumnDefinition>
+
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <Grid BackgroundColor="{Binding CalismaColor,
+                                            Converter={StaticResource StringToColorConverter}}" 
+                                        Grid.Column="0">
+
+                                    </Grid>
+                                    <Grid Grid.Column="1"></Grid>
+
+                                    <StackLayout Grid.Column="2">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label TextColor="Black" 
+                                                       FontSize="Large"
+                                                       FontAttributes="Bold"
+                                                       Text="{Binding Lesson}"/>
+                                            <Label TextColor="Gray"  FontSize="Medium"  HorizontalOptions="EndAndExpand"
+                                                       Text="{Binding StartDate, 
+                                                    Converter={StaticResource CalismaStartDateConverter}}"/>
+
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label TextColor="Gray" FontSize="Medium" FontAttributes="Bold"
+                                                    Text="{Binding Type}"/>
+                                            <Label Padding="0,5,0,2"
+                                                    TextColor="Gray" FontSize="Default" HorizontalOptions="EndAndExpand"
+                                                    Text="{Binding StartDate, Converter={StaticResource CalismaTimeConverter2}
+                                                ,ConverterParameter={Binding EndDate}}"></Label>
+
+
+                                            <Label  TextColor="Gray" Padding="0,5,0,2" FontSize="Default" HorizontalOptions="EndAndExpand"
+                                                   Text="{Binding StartDate, Converter={StaticResource DateToTimeStringConverter}}" >
+                                                
+                                            </Label>
+                                            <Label  TextColor="Gray" Text="-"></Label>
+                                            <Label  TextColor="Gray" Padding="0,5,0,2" FontSize="Default" HorizontalOptions="EndAndExpand"
+                                                   Text="{Binding EndDate, Converter={StaticResource DateToTimeStringConverter}}" >
+
+                                            </Label>
+
+                                            <Label FontSize="Default" TextColor="Gray" HorizontalOptions="EndAndExpand">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span  TextColor="Gray"  Text="{Binding StartDate, Converter={StaticResource DateToTimeStringConverter}}" />
+                                                        <Span  TextColor="Gray" Text="-"></Span>
+                                                        <Span    Text="{Binding EndDate, Converter={StaticResource DateToTimeStringConverter}}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+
+                                        <StackLayout Orientation="Horizontal" Padding="0,5,0,2">
+                                            <Label Text="Konu : " TextColor="Gray"/>
+                                            <Label  TextColor="Gray"
+                                                    Text="{Binding Konular}"/>
+
+                                        </StackLayout>
+
+
+
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <StackLayout Grid.Column="0">
+                                                <Label Text="{Binding Description}" TextColor="Gray" Padding="0,5,0,2"/>
+
+                                                <StackLayout>
+                                                    <Label Text="{Binding QuestionCount, Converter={StaticResource SoruToStringConverter}}"></Label>
+                                                    <Label Text="{Binding PageCount, Converter={StaticResource SayfaToStringConverter}}"></Label>
+                                                </StackLayout>
+                                                <Label Padding="0,0,0,2" Text="{Binding calisma, Converter={StaticResource SayfaSoruYaziConverter}}"/>
+                                            </StackLayout>
+
+                                            <Button x:Name="btnGit" Text="Git"  Margin="0,0,5,10"
+                                                Command="{Binding CollSelectCommand}"
+                                                CommandParameter="{Binding Id}"
+                                                Clicked="btnGit_Clicked"
+                                                 Grid.Column="1" FontSize="Small"
+                                                TextColor="White" HeightRequest="40"
+                                                BackgroundColor="Green">
+
+
+                                            </Button>
+                                        </Grid>
+
+
+
+                                    </StackLayout>
+                                </Grid>
+                            </StackLayout>
+                        </Frame>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>-->
+
+
+
+            <!--<ListView x:Name="lstAnaVeriler"  RowHeight="185"
+                      
+                      SelectedItem="{Binding SeciliKayit}"
+                      ItemsSource="{Binding SonCalismalar}">
+                
+                <ListView.Behaviors>
+                    <toolkit:EventToCommandBehavior
+                EventName="ItemTapped"
+                Command="{Binding TappedCommand}"
+                 CommandParameter="{Binding SeciliKayit}"
+                    />
+                </ListView.Behaviors>
+
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Margin="-3,10,0,0" CornerRadius="8" 
+                                   BackgroundColor="WhiteSmoke">
+                            <StackLayout>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="6"></ColumnDefinition>
+                                            <ColumnDefinition Width="10"></ColumnDefinition>
+
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+
+                                        <Grid BackgroundColor="{Binding CalismaColor,
+                                            Converter={StaticResource StringToColorConverter}}" 
+                                        Grid.Column="0">
+                                        
+                                    </Grid>
+                                        <Grid Grid.Column="1"></Grid>
+
+                                    <StackLayout Grid.Column="2">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label TextColor="Black" 
+                                                       FontSize="Large"
+                                                       FontAttributes="Bold"
+                                                       Text="{Binding Lesson}"/>
+                                                <Label TextColor="Gray"  FontSize="Medium"  HorizontalOptions="EndAndExpand"
+                                                       Text="{Binding calisma, 
+                                                    Converter={StaticResource CalismaStartDateConverter}}"/>
+
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label TextColor="Gray" FontSize="Medium" FontAttributes="Bold"
+                                                    Text="{Binding Type}"/>
+                                                <Label Padding="0,5,0,2"
+                                                    TextColor="Gray" FontSize="Default" HorizontalOptions="EndAndExpand"
+                                                    Text="{Binding calisma, Converter={StaticResource CalismaTimeConverter}}"/>
+
+                                            </StackLayout>
+
+                                            <StackLayout Orientation="Horizontal" Padding="0,5,0,2">
+                                                <Label Text="Konu : " TextColor="Gray"/>
+                                                <Label  TextColor="Gray"
+                                                    Text="{Binding lKonular, Converter={StaticResource CalisilanKonularConverter}}"/>
+
+                                            </StackLayout>
+
+                                            <StackLayout>
+                                                <Label Text="{Binding calisma.Description}" Padding="0,5,0,2"/>
+                                                <Label Padding="0,0,0,2" Text="{Binding calisma, Converter={StaticResource SayfaSoruYaziConverter}}"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Grid>
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>-->
+
+
+            <Label VerticalOptions="CenterAndExpand"  
+                   Margin="0,150,0,0"
+                   Text="{Binding SonCalismalar, Converter={StaticResource CalismaYokTextConverter}}" TextColor="Gray"
+                   HorizontalOptions="Center" ></Label>
+
+
+
+
+
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

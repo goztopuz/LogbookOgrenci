@@ -1,0 +1,43 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:converters="clr-namespace:Ogrenci4.src.Converters"
+             xmlns:local="clr-namespace:Ogrenci4"
+             x:Class="Ogrenci4.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+
+
+            <converters:ButtonBackConverter x:Key="ButtonBackConverter"/>
+            <converters:ButtonForeConverter x:Key="ButtonForeConverter"/>
+            <converters:SoruSayisiVisibleConverter x:Key="SoruSayisiVisibleConverter"/>
+            <converters:SayfaSayisiConverter x:Key="SayfaSayisiConverter"/>
+            <converters:TopicListVisibleConverter x:Key="TopicListVisibleConverter" />
+            <converters:ColorToCheckConverter x:Key="ColorToCheckConverter" />
+            <converters:CalismaYokTextConverter x:Key="CalismaYokTextConverter"/>
+            <converters:CalismaStartDateConverter x:Key="CalismaStartDateConverter"/>
+            <converters:CalismaTimeConverter x:Key="CalismaTimeConverter" />
+            <converters:CalisilanKonularConverter x:Key="CalisilanKonularConverter"/>
+            <converters:SayfaSoruYaziConverter x:Key="SayfaSoruYaziConverter"/>
+            <converters:StringToColorConverter x:Key="StringToColorConverter"/>
+            <converters:CalismaSureConverter x:Key="CalismaSureConverter"/>
+            <converters:KonuSayisiToVisibleConverter x:Key="KonuSayisiToVisibleConverter"/>
+            <converters:SeviyeStringConverter x:Key="SeviyeStringConverter"/>
+            <converters:CalismaTimeConverter2 x:Key="CalismaTimeConverter2"/>
+            <converters:DateToTimeStringConverter x:Key="DateToTimeStringConverter"/>
+            <converters:SoruToStringConverter x:Key="SoruToStringConverter"/>
+            <converters:SayfaToStringConverter x:Key="SayfaToStringConverter"/>
+            <converters:MesajSayiToStringConverter x:Key="MesajSayiToStringConverter"/>
+            <converters:MesajOkunduConverter x:Key="MesajOkunduConverter"/>
+            <converters:SonTarihConverter  x:Key="SonTarihConverter"/>
+
+
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

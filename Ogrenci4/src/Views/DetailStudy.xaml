@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             x:Class="Ogrenci4.src.Views.DetailStudy"
+             Title="Çalışma Detay">
+    <ScrollView>
+
+        <VerticalStackLayout Margin="5,30,5,10">
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Label Text="{Binding  calisma.Lesson}" TextColor="Gray"
+               FontAttributes="Bold"  FontSize="Large"  HorizontalOptions="Center"></Label>
+
+                <Label FontAttributes="Bold" FontSize="Large" Text=" - " HorizontalOptions="Center"></Label>
+
+                <Label FontSize="Large" Text="{Binding calisma.Type}" TextColor="Gray"
+                  FontAttributes="Bold"  HorizontalOptions="Center"></Label>
+            </HorizontalStackLayout>
+
+            <StackLayout Padding="10,20,10,10" Margin="0,10,0,0" Orientation="Horizontal">
+                <Label TextColor="Gray"  FontSize="Medium" 
+                                                       Text="{Binding calisma.StartDate, 
+                                                    Converter={StaticResource CalismaStartDateConverter}}"/>
+
+
+                <Label  FontSize="Medium"
+                                     TextColor="Gray"  HorizontalOptions="EndAndExpand"
+                  Text="{Binding calisma.StartDate, Converter={StaticResource DateToTimeStringConverter}}"/>
+                <Label  FontSize="Medium"
+                                     TextColor="Gray" 
+                  Text="-"/>
+                <Label  FontSize="Medium"
+                                     TextColor="Gray"  
+                  Text="{Binding calisma.EndDate, Converter={StaticResource DateToTimeStringConverter}}"/>
+
+
+
+            </StackLayout>
+            <Label  TextColor="Gray"  HorizontalOptions="EndAndExpand" Padding="0,2,10,2"
+                Text="{Binding calisma, Converter={StaticResource CalismaSureConverter}}"></Label>
+            <Label Padding="10,5,0,2" TextColor="Gray" FontSize="Medium"
+               Text="{Binding calisma, Converter={StaticResource SayfaSoruYaziConverter}}"/>
+
+            <BoxView HeightRequest="0.3" BackgroundColor="WhiteSmoke"/>
+            <Label Text ="Konular" FontSize="Medium" Padding="5,15,0,5"></Label>
+            <CollectionView x:Name="lstKonular" ItemsSource="{Binding SeciliKonular}"
+                 ItemsLayout="HorizontalList">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="5">
+                            <!--<Label Text="{Binding Name}"></Label>-->
+
+                            <Button  Text="{Binding KonuName}" Margin="5,5,5,5" CornerRadius="18"
+                            BorderWidth="1"
+                             BorderColor="Black"
+                             
+                            BackgroundColor="White"
+                             TextColor="Black"                 
+                            />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+            <Label Text="Konu Seçilmemiş" IsVisible="{Binding SeciliKonular, Converter={StaticResource KonuSayisiToVisibleConverter}}"
+               FontSize="Medium" HorizontalOptions="Center" TextColor="LightGray"></Label>
+
+            <Label Text="Açıklama/Diğer Konu" FontSize="Medium" Padding="5,15,0,5"></Label>
+            <Label Text="{Binding calisma.Description}" FontSize="Medium" TextColor="Gray" Padding="10,5,5,5"></Label>
+
+
+
+            <BoxView HeightRequest="0.3" BackgroundColor="WhiteSmoke"/>
+            <Label Text="Medya/Dosyalar/Çözülemeyenler" FontSize="Medium" Padding="5,15,0,5"></Label>
+
+            <syncfusion:SfListView x:Name="listView"  HeightRequest="110"
+              SelectionChangedCommand="{Binding ListViewSelectionChangedCommand}"
+               SelectionChangedCommandParameter="{x:Reference listView}"
+                   ItemsSource="{Binding Resimler}" Orientation="Horizontal"
+                   ItemSize="100">
+                <syncfusion:SfListView.ItemTemplate>
+                    <DataTemplate>
+
+
+
+                        <!--<Label Text="{Binding Name}"></Label>-->
+                        <StackLayout>
+                            <Image Source="{Binding urlPath}"
+                                  
+                                   HeightRequest="90" WidthRequest="60">
+                                <Image.GestureRecognizers>
+                                    <!--<TapGestureRecognizer NumberOfTapsRequired="2"
+                                                Tapped="TapGestureRecognizer_Tapped">
+
+                                            </TapGestureRecognizer>-->
+                                </Image.GestureRecognizers>
+                            </Image>
+
+                        </StackLayout>
+
+                    </DataTemplate>
+                </syncfusion:SfListView.ItemTemplate>
+            </syncfusion:SfListView>
+
+
+            <!--<HorizontalStackLayout Padding="10">
+
+                <CollectionView x:Name="lstResimler" 
+                          ItemsSource="{Binding Resimler}">
+
+
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+
+
+
+                            --><!--<Label Text="{Binding Name}"></Label>--><!--
+                            <StackLayout>
+                                <Image Source="{Binding urlPath}"
+                                  
+                                   HeightRequest="90" WidthRequest="60">
+                                    <Image.GestureRecognizers>
+                                        --><!--<TapGestureRecognizer NumberOfTapsRequired="2"
+                                                Tapped="TapGestureRecognizer_Tapped">-->
+
+                                        <!--</TapGestureRecognizer>--><!--
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                            </StackLayout>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                --><!--<Label Text="Resimler" VerticalOptions="Center" TextColor="LightGray" ></Label>--><!--
+            </HorizontalStackLayout>-->
+
+
+
+
+            <BoxView HeightRequest="0.3" BackgroundColor="WhiteSmoke"/>
+
+            <Grid Margin="5,40,12,10">
+                <Grid.ColumnDefinitions>
+
+                    <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Text="Çalışma Rengi :" TextColor="Gray"  FontSize="Medium"
+                   Grid.Row="0" Grid.Column="0"></Label>
+                <Grid Grid.Row="0" Grid.Column="1" BackgroundColor="{Binding calisma.CalismaColor,
+                                            Converter={StaticResource StringToColorConverter}}" ></Grid>
+
+            </Grid>
+
+
+
+            <Grid Padding="10,40,10,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Row="0"  Grid.Column="1"
+                       Text="Çalışmayı Sil" TextColor="White" BackgroundColor="Red"
+                       Command="{Binding CalismaSilCommand}" ></Button>
+
+            </Grid>
+
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+</ContentPage>

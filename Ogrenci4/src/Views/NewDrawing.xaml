@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             x:Class="Ogrenci4.src.Views.NewDrawing"
+             Title="Resim">
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button  HorizontalOptions="Center"  VerticalOptions="Center"
+                     Text="Kaydet" Grid.Column="0" Grid.Row="0"></Button>
+            <mct:DrawingView LineColor="Black"
+                         Grid.Row="1" Grid.Column="0"
+                         ShouldClearOnFinish="False"
+                         IsMultiLineModeEnabled="True"
+                         LineWidth="2">
+
+            </mct:DrawingView>
+        </Grid>
+    </ScrollView>
+</ContentPage>

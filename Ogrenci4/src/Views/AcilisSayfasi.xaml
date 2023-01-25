@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Ogrenci4.src.Views.AcilisSayfasi"
+             Title="Acilis Sayfasi">
+    <StackLayout Padding="0,180,0,0">
+
+        <Label Text="Ogrenci No:" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+        <Entry x:Name="txtOgrenciNo"  Margin="0,20,0,10"
+               VerticalOptions="Center" BackgroundColor="WhiteSmoke"
+            Text="{Binding OgrenciNo}" FontSize="Medium" HeightRequest="60"
+            WidthRequest="120"   HorizontalOptions="Center" Keyboard="Numeric">
+        </Entry>
+        <Button HorizontalOptions="CenterAndExpand" Text="Giriş Yap" 
+               VerticalOptions="Center" WidthRequest="120"
+               Clicked="Button_Clicked"
+                ></Button>
+
+
+    </StackLayout>
+</ContentPage>

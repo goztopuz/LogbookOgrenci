@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Ogrenci4.src.Views.MesajDetay"
+             Title="MesajDetay">
+    <VerticalStackLayout>
+
+        <StackLayout Margin="10,100,10,20"  HeightRequest="200"
+                     BackgroundColor="WhiteSmoke">
+            <Label  FontSize="Medium" FontAttributes="Bold" Padding="0,15,0,5" TextColor="Gray"
+                Text="{Binding Mesaj.msgDate, Converter={StaticResource CalismaStartDateConverter}}" >
+
+            </Label>
+            <Label FontSize="Large" FontAttributes="Bold"  HorizontalOptions="CenterAndExpand"  TextColor="Gray"
+                   Text="{Binding Mesaj.Konu}"></Label>
+            <Label FontSize="Medium" TextColor="Gray" Padding="5"
+                Text="{Binding Mesaj.Mesaj}"></Label>
+
+            <StackLayout Orientation="Horizontal">
+                <Label FontSize="Medium" Text=" Ders: "></Label>
+                <Label FontSize="Medium" TextColor="Gray" Text="{Binding Mesaj.Unite}"></Label>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="20">
+                <Label Text="Son Tarih  : " ></Label>
+                <Label TextColor="Gray" Text="{Binding Mesaj.SonTarih, Converter={StaticResource SonTarihConverter}}" />
+            </StackLayout>
+
+
+
+        </StackLayout>
+        <Button Text="Tamam" Command="{Binding TamamCommand}"></Button>
+
+    </VerticalStackLayout>
+</ContentPage>

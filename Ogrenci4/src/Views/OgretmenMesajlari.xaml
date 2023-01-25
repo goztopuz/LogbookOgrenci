@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Ogrenci4.src.Views.OgretmenMesajlari"
+             Title="OgretmenMesajlari">
+    <VerticalStackLayout>
+        <ListView x:Name="lstAnaVeriler"  RowHeight="100"
+                  SelectedItem="{Binding SeciliKayit}"
+                      ItemsSource="{Binding MesajListe}">
+
+
+
+            <ListView.Behaviors>
+                <toolkit:EventToCommandBehavior
+                EventName="ItemTapped"
+                Command="{Binding TappedCommand}"
+                 CommandParameter="{Binding SeciliKayit}"
+                    />
+            </ListView.Behaviors>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame Margin="-3,10,0,0" CornerRadius="8" 
+                                   BackgroundColor="WhiteSmoke">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="25"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+
+                                <StackLayout Grid.Column="0">
+                                    <Button  HeightRequest="20" VerticalOptions="CenterAndExpand"
+                      IsVisible="{Binding Okundu, Converter={StaticResource MesajOkunduConverter}}"
+                      WidthRequest="20" Opacity="0.8" BackgroundColor="MediumBlue" CornerRadius="50"  
+                      FontSize="Small" Padding="-9,-18,-10,-10">
+                                    </Button>
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="1" Margin="5,0,0,0">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label  FontSize="Medium" TextColor="Gray"
+                                        Text="{Binding msgDate, Converter={StaticResource CalismaStartDateConverter}}"></Label>
+                                        <Label Text=" - "></Label>
+                                        <Label FontSize="Medium"  TextColor="Gray" Text="{Binding Konu}"></Label>
+
+                                    </StackLayout>
+                                    <Label TextColor="Gray"  Padding="5,5,0,0" Text="{Binding Mesaj}"></Label>
+                                </StackLayout>
+                            </Grid>
+
+
+
+
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+    </VerticalStackLayout>
+</ContentPage>
