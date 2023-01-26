@@ -5,7 +5,7 @@
              Title="Çalışma Süreci">
     <ScrollView>
     <VerticalStackLayout>
-        <Label 
+        <Label x:Name="lblTimer"
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />

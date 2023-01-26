@@ -24,7 +24,7 @@
             </HorizontalStackLayout>
 
 
-            <StackLayout  IsVisible="True" Background="Red" Opacity="0.7">
+            <StackLayout x:Name="StckSayac" IsVisible="False" Background="Red" Opacity="0.7">
                 
                 
                 <Label Text="Devam Eden Çalışma"  TextColor="White"/>
@@ -32,7 +32,7 @@
                        HorizontalOptions="Center" FontSize="Large" Text=""></Label>
 
                 <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding }">
+                    <TapGestureRecognizer Command="{Binding SessionDetailCommand}">
                         
                     </TapGestureRecognizer>
                 </StackLayout.GestureRecognizers>

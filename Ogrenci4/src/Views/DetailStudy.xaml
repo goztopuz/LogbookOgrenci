@@ -10,6 +10,7 @@
             <HorizontalStackLayout HorizontalOptions="Center">
                 <Label Text="{Binding  calisma.Lesson}" TextColor="Gray"
                FontAttributes="Bold"  FontSize="Large"  HorizontalOptions="Center"></Label>
+                
 
                 <Label FontAttributes="Bold" FontSize="Large" Text=" - " HorizontalOptions="Center"></Label>
 

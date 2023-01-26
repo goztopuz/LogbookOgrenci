@@ -92,6 +92,19 @@ namespace Ogrenci4.src.ViewModels
             }
         }
 
+        private bool _sayacVisible = false;
+        public bool SayacVisible
+        {
+            get => _sayacVisible;
+            set
+            {
+                _sayacVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+
         private List<CalismaTumBilgi2> _sonCalismalar;
         public List<CalismaTumBilgi2> SonCalismalar
         {

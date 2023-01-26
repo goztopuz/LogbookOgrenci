@@ -81,6 +81,7 @@ public partial class Anasayfa : ContentPage
             App.sess.CurrentSecond = 0;
             stopwatch.Start();
             timer.Start();
+            StckSayac.IsVisible= true;
 
         });
 
